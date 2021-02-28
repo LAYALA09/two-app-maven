@@ -25,7 +25,7 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
     public ArtistDTO createNew(ArtistDTO dto) {
         // debo hacer la conversion de dto a entity
         Artist artist = artistMapper.toEntity(dto, context);
-        // se le pide al repository que cuarde la entidad
+        // se le pide al repository que guarde la entidad
         artistRepository.save(artist);
         // convierte a dto las instancia artist con el id que le asigno MySQL
         ArtistDTO artistSaved = artistMapper.toDTO(artist, context);

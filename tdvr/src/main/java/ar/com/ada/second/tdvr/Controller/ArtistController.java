@@ -1,4 +1,4 @@
-package ar.com.ada.second.tdvr.Controller;
+package ar.com.ada.second.tdvr.controller;
 
 import ar.com.ada.second.tdvr.model.dto.ArtistDTO;
 import ar.com.ada.second.tdvr.service.ArtistService;
