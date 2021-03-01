@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 public class AlbumServices implements Services <AlbumDTO, Album>{
+
     private AlbumMapper albumMapper = AlbumMapper.MAPPER;
 
     @Autowired
