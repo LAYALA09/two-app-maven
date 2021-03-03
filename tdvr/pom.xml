@@ -21,7 +21,7 @@
 		<!--paso 1:definir variables globales de version de librerias(mapstruct y lombock) -->
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<org.projectlombock.version>1.18.18</org.projectlombock.version>
-
+		<org.projectlombok.binding.version>0.2.0</org.projectlombok.binding.version>
 	</properties>
 
 	<dependencies>
@@ -51,6 +51,7 @@
 			<artifactId>lombok</artifactId>
 			<!--paso 2:agregar version en base a las variables -->
 			<version>${org.projectlombock.version}</version>
+			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
 
@@ -67,6 +68,14 @@
 			<version>${org.mapstruct.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-mapstruct-binding</artifactId>
+			<version>${org.projectlombok.binding.version}</version>
+		</dependency>
+
+
 
 	</dependencies>
 
@@ -75,15 +84,8 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
+
 			<!-- paso 4:declarar proceso de bulding entre lombock y mastruck-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -103,6 +105,12 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 							<version>${org.projectlombock.version}</version>
+						</path>
+
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>${org.projectlombok.binding.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>

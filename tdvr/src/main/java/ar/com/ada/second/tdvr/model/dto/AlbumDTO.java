@@ -27,7 +27,6 @@ public class AlbumDTO implements Serializable {//vamos a recibir datos de reques
     @NotBlank(message = "is required")
     @Pattern(regexp = "^[0-9a-zA-ZáéíóúÁÉÍÓÚÜüñÑ\\s]*$", message = "title contains not allowed characters")
     private String title;
-
     /**
      * @JsonFormat es el formato en que se admite la fecha, en este caso es yyyy (año de 4 digitos). es caso tal que
      * se quiera otro formato, solo hay que inidcarlo (ver mas en https://www.baeldung.com/jackson-jsonformat)
@@ -37,14 +36,13 @@ public class AlbumDTO implements Serializable {//vamos a recibir datos de reques
     @NotNull(message = "is required")
     @PastOrPresent(message = "the year must be past or present")
     private Date released;
-
     private ArtistDTO artist;
-
     private List<TrackDTO> tracks;
 
     public Boolean hasNullOrEmptyAttributes() {
         return title == null || title.trim().isEmpty()
-                || released == null || artist == null;
+
+                || released == null;
     }
 }
 

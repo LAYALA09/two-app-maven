@@ -82,11 +82,13 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
         return artistUpdated;
     }
     @Override
-    public void remove(Long id) {
+    public void remove(ArtistDTO dto ,Long id) {
         Optional<Artist> artistByIdToDelete = artistRepository.findById(id);
         Artist artist = artistByIdToDelete
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
         artistRepository.deleteById(id);
+        ArtistDTO artistDeleted = artistMapper.toDTO(artist, context);
+        return artistDeleted;
     }
 
     @Override
@@ -101,15 +103,7 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
         //entity.setSurname(dto.getSurname());
     }
 
-    public ArtistDTO removeById(Long id) {
-        Optional<Artist> artistByIdToDelete = artistRepository.findById(id);
 
-        Artist artist = artistByIdToDelete
-                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
-        artistRepository.delete(artist);
-        ArtistDTO artistDeleted = artistMapper.toDTO(artist, context);
-        return artistDeleted;
-    }
 
         //capa de negocio para consultar crear modificar y borrar registro en el sistemas
     //las interfaces definen contratos

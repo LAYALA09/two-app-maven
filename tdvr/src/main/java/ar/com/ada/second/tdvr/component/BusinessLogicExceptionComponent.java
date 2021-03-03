@@ -1,12 +1,12 @@
 package ar.com.ada.second.tdvr.component;
 
-import ar.com.ada.second.tdvr.advice.validation.RestErrorsResponse;
+
+import ar.com.ada.second.tdvr.exception.BusinessLogicException;
 import ar.com.ada.second.tdvr.exception.EntityError;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.NativeWebRequest;
+
+
 @Component
 public class BusinessLogicExceptionComponent {
 

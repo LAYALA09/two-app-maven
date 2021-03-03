@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value="artist")
+@RequestMapping(value="artists")
 public class ArtistController {
     @Autowired
     private ArtistService artistService;
@@ -47,13 +47,9 @@ public class ArtistController {
                 .created(uri)
                 .body(newArtist);
     }
-    public ResponseEntity patchArtistByIdMethod(@RequestBody ArtistDTO dto, @PathVariable Long id) {
-
-        ArtistDTO artisUpdated = artistService.update(dto, id);
-
-        return ResponseEntity
-                .ok()
-                .body(artisUpdated);
+    @PutMapping({ "/{id}", "/{id}/" })
+    public ResponseEntity putArtistByIdMethod() {
+        return null;
     }
     @DeleteMapping({ "/{id}", "/{id}/" })
     public ResponseEntity deleteArtistByIdMethod(@PathVariable Long id) {
