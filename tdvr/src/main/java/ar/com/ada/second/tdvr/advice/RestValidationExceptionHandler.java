@@ -31,7 +31,6 @@ public class RestValidationExceptionHandler extends ResponseEntityExceptionHandl
                 .map(fieldError -> new RestFieldError(
                         fieldError.getField(),
                         fieldError.getDefaultMessage()
-
                 ))
                 .collect(Collectors.toList());
 

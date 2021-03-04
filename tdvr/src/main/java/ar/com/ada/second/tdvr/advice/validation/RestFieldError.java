@@ -4,4 +4,6 @@ public class RestFieldError {
     private String field;
     private String message;
 
+    public RestFieldError(String field, String defaultMessage) {
+    }
 }

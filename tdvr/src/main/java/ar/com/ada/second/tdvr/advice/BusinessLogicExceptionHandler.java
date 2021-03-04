@@ -17,6 +17,7 @@ public class BusinessLogicExceptionHandler {
 
         HttpStatus httpStatus = e.getHttpStatus() != null
                 ? e.getHttpStatus()
+                //si viene nulo
                 : HttpStatus.INTERNAL_SERVER_ERROR;
 
         RestErrorsResponse restErrorsResponse = new RestErrorsResponse<EntityError>(

@@ -8,4 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface ArtistMapper extends DataMapper<ArtistDTO, Artist> {
     ArtistMapper MAPPER = Mappers.getMapper(ArtistMapper.class);
+
+
 }

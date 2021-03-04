@@ -4,6 +4,7 @@ import ar.com.ada.second.tdvr.component.BusinessLogicExceptionComponent;
 import ar.com.ada.second.tdvr.model.dto.ArtistDTO;
 import ar.com.ada.second.tdvr.model.entity.Artist;
 import ar.com.ada.second.tdvr.model.mapper.ArtistMapper;
+import ar.com.ada.second.tdvr.model.mapper.AvoindingMappingContext;
 import ar.com.ada.second.tdvr.model.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ArtistService implements Services<ArtistDTO, Artist>{
+public class ArtistService implements Services<ArtistDTO, Artist> {
     private ArtistMapper artistMapper = ArtistMapper.MAPPER;
 
     @Autowired
     private BusinessLogicExceptionComponent logicExceptionComponent;
     @Autowired
-    private AvoidingMappingContext context;
+    private AvoindingMappingContext context;
     @Autowired
     private ArtistRepository artistRepository;
+
     @Override
     public ArtistDTO createNew(ArtistDTO dto) {
         // debo hacer la conversion de dto a entity
@@ -32,6 +34,7 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
         // le entrego al controlador el dto con el id
         return artistSaved;
     }
+
     @Override
     public List<ArtistDTO> getAll() {
         // llamar al repositorio y pedirle que haga la consulta a la BD de todos los registro de de esa entidad
@@ -50,13 +53,17 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
         // retorno la lista resultante de la conversion
         return artistDTOS;
     }
+
     @Override
     public ArtistDTO getById(Long id) {
+
+
         Optional<Artist> artistOptional = artistRepository.findById(id);
         Artist artist = artistOptional
-                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
-        ArtistDTO artistDTO = artistMapper.toDTO(artist, context);
-        return artistDTO;
+                .orElseThrow(()-> logicExceptionComponent.getExceptionEntityNotFound("Artist" ,id));
+          artistMapper.to//FALTA TERMINAR
+        //Retorno la lista resultante de la conversion
+
         /*
         Optional<Artist> artistOptional = artistRepository.findById(id);
         if (artistOptional.isPresent()) {
@@ -68,6 +75,7 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
         }
         */
     }
+
     @Override
     public ArtistDTO update(ArtistDTO dto, Long id) {
         // verifico si el id existe en la base de datos
@@ -81,8 +89,9 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
         ArtistDTO artistUpdated = artistMapper.toDTO(artistById, context);
         return artistUpdated;
     }
+
     @Override
-    public void remove(ArtistDTO dto ,Long id) {
+    public void remove(ArtistDTO dto, Long id) {
         Optional<Artist> artistByIdToDelete = artistRepository.findById(id);
         Artist artist = artistByIdToDelete
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
@@ -104,8 +113,7 @@ public class ArtistService implements Services<ArtistDTO, Artist>{
     }
 
 
-
-        //capa de negocio para consultar crear modificar y borrar registro en el sistemas
+    //capa de negocio para consultar crear modificar y borrar registro en el sistemas
     //las interfaces definen contratos
 
 }
