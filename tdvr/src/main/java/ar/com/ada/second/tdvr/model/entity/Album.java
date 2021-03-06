@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.sound.midi.Track;
 import java.io.Serializable;
+import java.time.Year;
 import java.util.Date;
 import java.util.List;
 
@@ -18,14 +19,14 @@ import java.util.List;
 
 public class Album implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String title;
-
+    @Convert(converter = YearAttributeConverter.class)
     @Column(nullable = false)
-    private Date released;
+    private Year released;
 
     @ManyToOne
     @JoinColumn(name = "Artist_id", nullable = false, foreignKey = @ForeignKey(name = "fk_Album_Artist"))

@@ -1,7 +1,7 @@
 package ar.com.ada.second.tdvr.controller;
 
 import ar.com.ada.second.tdvr.model.dto.AlbumDTO;
-import ar.com.ada.second.tdvr.service.AlbumServices;
+import ar.com.ada.second.tdvr.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class AlbumController {
     @Autowired
-    private AlbumServices albumServices;
+    private AlbumService albumServices;
     @PostMapping({ "/artists/{artistId}/albums", "/artists/{artistId}/albums/" })
     public ResponseEntity postArtistMethod(
             @Valid @RequestBody AlbumDTO dto,

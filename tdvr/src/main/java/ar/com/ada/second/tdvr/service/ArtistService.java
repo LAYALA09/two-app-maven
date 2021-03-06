@@ -4,7 +4,7 @@ import ar.com.ada.second.tdvr.component.BusinessLogicExceptionComponent;
 import ar.com.ada.second.tdvr.model.dto.ArtistDTO;
 import ar.com.ada.second.tdvr.model.entity.Artist;
 import ar.com.ada.second.tdvr.model.mapper.ArtistMapper;
-import ar.com.ada.second.tdvr.model.mapper.AvoindingMappingContext;
+import ar.com.ada.second.tdvr.model.mapper.AvoidingMappingContext;
 import ar.com.ada.second.tdvr.model.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ArtistService implements Services<ArtistDTO, Artist> {
     @Autowired
     private BusinessLogicExceptionComponent logicExceptionComponent;
     @Autowired
-    private AvoindingMappingContext context;
+    private AvoidingMappingContext context;
     @Autowired
     private ArtistRepository artistRepository;
 

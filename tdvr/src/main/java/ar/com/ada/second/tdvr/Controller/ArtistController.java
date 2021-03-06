@@ -47,6 +47,15 @@ public class ArtistController {
                 .created(uri)
                 .body(newArtist);
     }
+    @PatchMapping({"/{id}", "/{id}/"})
+    public ResponseEntity patchArtistByIdMethod(@RequestBody ArtistDTO dto, @PathVariable Long id) {
+
+        ArtistDTO artisUpdated = artistService.update(dto, id);
+
+        return ResponseEntity
+                .ok()
+                .body(artisUpdated);
+    }
     @PutMapping({ "/{id}", "/{id}/" })
     public ResponseEntity putArtistByIdMethod() {
         return null;

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Table(name ="Track")
 public class Track implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -24,6 +24,6 @@ public class Track implements Serializable {
     private String trackDuration;
 
     @ManyToOne
-    @JoinColumn(name = "Album_id", nullable = false, foreignKey = @ForeignKey(name = "fk_Album_Track"))
+    @JoinColumn(name = "Album_id", nullable = false, foreignKey = @ForeignKey(name = "fk_Track_Album"))
     private Album album;
 }

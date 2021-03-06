@@ -5,6 +5,7 @@ import ar.com.ada.second.tdvr.model.dto.AlbumDTO;
 import ar.com.ada.second.tdvr.model.entity.Album;
 import ar.com.ada.second.tdvr.model.entity.Artist;
 import ar.com.ada.second.tdvr.model.mapper.AlbumMapper;
+import ar.com.ada.second.tdvr.model.mapper.AvoidingMappingContext;
 import ar.com.ada.second.tdvr.model.repository.AlbumRepository;
 import ar.com.ada.second.tdvr.model.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +15,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AlbumServices implements Services <AlbumDTO, Album>{
+public class AlbumService implements Services <AlbumDTO, Album>{
 
     private AlbumMapper albumMapper = AlbumMapper.MAPPER;
+
     @Autowired
     private AvoidingMappingContext context;
+
     @Autowired
     private BusinessLogicExceptionComponent logicExceptionComponent;
+
     @Autowired
     private AlbumRepository albumRepository;
+
     @Autowired
     private ArtistRepository artistRepository;
+
     @Override
     public AlbumDTO createNew(AlbumDTO dto) {
         return null;
     }
+
     public AlbumDTO createNew(AlbumDTO dto, Long id) {
 
         /**
@@ -41,10 +48,15 @@ public class AlbumServices implements Services <AlbumDTO, Album>{
         Artist artist = artistRepository
                 .findById(id)
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
+
         Album albumToSave = albumMapper.toEntity(dto, context);
+
         albumToSave.setArtist(artist);
+
         albumRepository.save(albumToSave);
+
         AlbumDTO albumSaved = albumMapper.toDTO(albumToSave, context);
+
         return albumSaved;
     }
 
@@ -63,27 +75,46 @@ public class AlbumServices implements Services <AlbumDTO, Album>{
     public AlbumDTO getById(Long id) {
 
         Optional<Album> albumOptional = albumRepository.findById(id);
+
         Album album = albumOptional.orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Album", id));
+
         AlbumDTO albumDTO = albumMapper.toDTO(album, context);
+
         return albumDTO;
     }
 
     @Override
     public void remove(Long id) {
+
         Optional<Album> albumByIdToDelete = albumRepository.findById(id);
+
         Album album = albumByIdToDelete.orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Album", id));
+
         albumRepository.delete(album);
     }
 
     @Override
     public AlbumDTO update(AlbumDTO dto, Long id) {
-        return null;
+
+        // verifico si el id existe en la base de datos
+        Optional<Album> albumOptional = albumRepository.findById(id);
+
+        Album albumtById = albumOptional
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Album", id));
+
+        mergeData(albumtById, dto);
+
+        albumRepository.save(albumtById);
+
+        AlbumDTO albumUpdated = albumMapper.toDTO(albumtById, context);
+
+        return albumUpdated;
     }
 
     @Override
+    public void mergeData(Album entity, AlbumDTO dto) {
 
-        public void mergeData(Album entity, AlbumDTO dto) {
-            if (dto.hasNullOrEmptyAttributes())
+        if (dto.hasNullOrEmptyAttributes())
                 throw logicExceptionComponent.getExceptionEntityEmptyValues("Album");
 
             if (!entity.getTitle().equals(dto.getTitle()))
