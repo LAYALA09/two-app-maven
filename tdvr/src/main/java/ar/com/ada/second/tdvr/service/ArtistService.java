@@ -27,7 +27,7 @@ public class ArtistService implements Services<ArtistDTO, Artist> {
     public ArtistDTO createNew(ArtistDTO dto) {
         // debo hacer la conversion de dto a entity
         Artist artist = artistMapper.toEntity(dto, context);
-        // se le pide al repository que guarde la entidad
+        // se le pide al repository que cuarde la entidad
         artistRepository.save(artist);
         // convierte a dto las instancia artist con el id que le asigno MySQL
         ArtistDTO artistSaved = artistMapper.toDTO(artist, context);
@@ -56,14 +56,11 @@ public class ArtistService implements Services<ArtistDTO, Artist> {
 
     @Override
     public ArtistDTO getById(Long id) {
-
-
         Optional<Artist> artistOptional = artistRepository.findById(id);
         Artist artist = artistOptional
-                .orElseThrow(()-> logicExceptionComponent.getExceptionEntityNotFound("Artist" ,id));
-          artistMapper.to//FALTA TERMINAR
-        //Retorno la lista resultante de la conversion
-
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
+        ArtistDTO artistDTO = artistMapper.toDTO(artist, context);
+        return artistDTO;
         /*
         Optional<Artist> artistOptional = artistRepository.findById(id);
         if (artistOptional.isPresent()) {
@@ -83,37 +80,35 @@ public class ArtistService implements Services<ArtistDTO, Artist> {
         Artist artistById = artistOptional
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
         mergeData(artistById, dto);
-
         artistRepository.save(artistById);
-
         ArtistDTO artistUpdated = artistMapper.toDTO(artistById, context);
         return artistUpdated;
     }
 
     @Override
-    public void remove(ArtistDTO dto, Long id) {
+    public void remove(Long id) {
         Optional<Artist> artistByIdToDelete = artistRepository.findById(id);
         Artist artist = artistByIdToDelete
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
         artistRepository.deleteById(id);
-        ArtistDTO artistDeleted = artistMapper.toDTO(artist, context);
-        return artistDeleted;
     }
 
     @Override
     public void mergeData(Artist entity, ArtistDTO dto) {
         if (dto.hasNullOrEmptyAttributes())
             throw logicExceptionComponent.getExceptionEntityEmptyValues("Artist");
-
         if (!entity.getName().equals(dto.getName()))
             entity.setName(dto.getName());
-
         //if (!entity.getSurname().equals(dto.getSurname()))
         //entity.setSurname(dto.getSurname());
     }
 
-
-    //capa de negocio para consultar crear modificar y borrar registro en el sistemas
-    //las interfaces definen contratos
-
+    public ArtistDTO removeById(Long id) {
+        Optional<Artist> artistByIdToDelete = artistRepository.findById(id);
+        Artist artist = artistByIdToDelete
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
+        artistRepository.delete(artist);
+        ArtistDTO artistDeleted = artistMapper.toDTO(artist, context);
+        return artistDeleted;
+    }
 }

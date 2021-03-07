@@ -1,5 +1,6 @@
 package ar.com.ada.second.tdvr.model.entity;
 
+import ar.com.ada.second.tdvr.model.mapper.converter.YearAttributeConverter;
 import lombok.*;
 
 import javax.persistence.*;
