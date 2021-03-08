@@ -29,6 +29,7 @@ public class ArtistController {
                 .ok()
                 .body(artists);
     }
+
     @GetMapping({ "/{id}", "/{id}/" })
     public ResponseEntity getArtistByIdMethod(@PathVariable Long id) {
         ArtistDTO byId = artistService.getById(id);
@@ -36,6 +37,7 @@ public class ArtistController {
                 .ok()
                 .body(byId);
     }
+
     @PostMapping({ "/", "" })
     public ResponseEntity postArtistMethod(@Valid @RequestBody ArtistDTO dto) throws URISyntaxException {
         // se llama al servicio y se le pide que guarde el artista
@@ -47,6 +49,7 @@ public class ArtistController {
                 .created(uri)
                 .body(newArtist);
     }
+
     @PatchMapping({"/{id}", "/{id}/"})
     public ResponseEntity patchArtistByIdMethod(@RequestBody ArtistDTO dto, @PathVariable Long id) {
 
@@ -56,10 +59,12 @@ public class ArtistController {
                 .ok()
                 .body(artisUpdated);
     }
+
     @PutMapping({ "/{id}", "/{id}/" })
     public ResponseEntity putArtistByIdMethod() {
         return null;
     }
+
     @DeleteMapping({ "/{id}", "/{id}/" })
     public ResponseEntity deleteArtistByIdMethod(@PathVariable Long id) {
 

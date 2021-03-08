@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import net.bytebuddy.asm.Advice;
 
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -19,14 +20,18 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+
 public class AlbumDTO implements Serializable {//vamos a recibir datos de request http
+
     private Long id;
     /**
      * @Pattern es la validacion con expresion regular, en este caso solo admite caracteres de la a-z A-Z,
      * espacios y numeros
      */
     @NotBlank(message = "is required")
+
     @Pattern(regexp = "^[0-9a-zA-ZáéíóúÁÉÍÓÚÜüñÑ\\s]*$", message = "title contains not allowed characters")
+
     private String title;
     /**
      * @JsonFormat es el formato en que se admite la fecha, en este caso es yyyy (año de 4 digitos). es caso tal que
@@ -34,10 +39,15 @@ public class AlbumDTO implements Serializable {//vamos a recibir datos de reques
      * @PastOrPresent es para validar que la fecha que se ingresa se una actual o pasada, no futura
      */
     @JsonFormat(pattern = "yyyy")
+
     @NotNull(message = "is required")
+
     @PastOrPresent(message = "the year must be past or present")
+
     private Year released;
+
     private ArtistDTO artist;
+
     private List<TrackDTO> tracks;
 
     public Boolean hasNullOrEmptyAttributes() {

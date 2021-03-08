@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class Artist implements Serializable{//vamos a mandar datos a una bd
     @Id
     //indico como se va a incrementar
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, length = 30)

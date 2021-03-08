@@ -13,12 +13,17 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class ArtistDTO implements Serializable {//vamos a recibir datos de request http
+
     private Long id;
+
     @NotBlank(message = "is required")
+
     private String name;
 
     public Boolean hasNullOrEmptyAttributes() {
+
         return name == null || name.trim().isEmpty();
+
         // || surname == null || surname.trim().isEmpty();
     }
 }
