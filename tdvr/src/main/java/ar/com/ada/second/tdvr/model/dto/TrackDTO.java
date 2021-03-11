@@ -20,10 +20,9 @@ public class TrackDTO implements Serializable {
      * espacios y numeros
      */
     @NotBlank(message = "is required")
-
-    @Pattern(regexp = "^[0-9a-zA-ZáéíóúÁÉÍÓÚÜüñÑ\\s]*$", message = "title contains not allowed characters")
-
     private String title;
+
+
 
     @NotBlank(message = "is required")
 

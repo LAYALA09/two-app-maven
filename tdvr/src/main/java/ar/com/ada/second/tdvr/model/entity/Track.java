@@ -7,12 +7,14 @@ import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name ="Track")
+
 public class Track implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

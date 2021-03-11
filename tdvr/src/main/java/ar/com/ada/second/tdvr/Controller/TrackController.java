@@ -17,6 +17,7 @@ public class TrackController {
     private TrackServices trackServices;
 
     @PostMapping({"/album/{albumId}/tracks", "/album/{albumId}/tracks/"})
+
     public ResponseEntity postAlbumMethod(
             @Valid @RequestBody TrackDTO dto,
             @PathVariable Long albumId) throws URISyntaxException {
@@ -40,6 +41,7 @@ public class TrackController {
     }
 
     @GetMapping({"/tracks", "tracks"})
+
     public ResponseEntity getTracksMethod() {
         // se llama al servicio y se le pide el listado de tracks
         List<TrackDTO> tracks = trackServices.getAll();
@@ -51,6 +53,7 @@ public class TrackController {
     }
 
     @GetMapping({"/tracks/{id}", "/tracks/{id}/"})
+
     public ResponseEntity getTrackByIdMethod(@PathVariable Long id) {
 
         TrackDTO byId = trackServices.getById(id);
@@ -61,6 +64,7 @@ public class TrackController {
     }
 
     @DeleteMapping({"/tracks/{id}", "/tracks/{id}/"})
+
     public ResponseEntity deleteTrackByIdMethod(@PathVariable Long id) {
 
         trackServices.remove(id);
@@ -71,6 +75,7 @@ public class TrackController {
     }
 
     @PatchMapping({"/albums/{albumId}/tracks/{trackId}", "/albums/{albumId}/tracks/{trackId}/"})
+
     public ResponseEntity patchAlbumByIdMethod(
             @RequestBody TrackDTO dto,
             @PathVariable Long albumId,
