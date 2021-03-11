@@ -2,16 +2,13 @@ package ar.com.ada.second.tdvr.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import net.bytebuddy.asm.Advice;
 
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.Year;
-
 import java.util.List;
 
 

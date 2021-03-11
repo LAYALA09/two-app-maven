@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AlbumService implements Services <AlbumDTO, Album>{
+public class AlbumServices implements Services <AlbumDTO, Album>{
 
     private AlbumMapper albumMapper = AlbumMapper.MAPPER;
 

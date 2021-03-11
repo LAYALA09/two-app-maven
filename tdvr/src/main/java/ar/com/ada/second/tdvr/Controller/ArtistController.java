@@ -1,7 +1,7 @@
 package ar.com.ada.second.tdvr.controller;
 
 import ar.com.ada.second.tdvr.model.dto.ArtistDTO;
-import ar.com.ada.second.tdvr.service.ArtistService;
+import ar.com.ada.second.tdvr.service.ArtistServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,10 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value="artists")
+@RequestMapping(value="artist")
 public class ArtistController {
     @Autowired
-    private ArtistService artistService;
+    private ArtistServices artistService;
 
     @GetMapping({ "/", "" })
     public ResponseEntity getArtistsMethod() {

@@ -1,7 +1,7 @@
 package ar.com.ada.second.tdvr.controller;
 
 import ar.com.ada.second.tdvr.model.dto.AlbumDTO;
-import ar.com.ada.second.tdvr.service.AlbumService;
+import ar.com.ada.second.tdvr.service.AlbumServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +10,15 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
 @RestController
 public class AlbumController {
+
     @Autowired
-    private AlbumService albumServices;
+    private AlbumServices albumServices;
+
     @PostMapping({ "/artists/{artistId}/albums", "/artists/{artistId}/albums/" })
+
     public ResponseEntity postArtistMethod(
             @Valid @RequestBody AlbumDTO dto,
             @PathVariable Long artistId) throws URISyntaxException {
@@ -28,16 +32,22 @@ public class AlbumController {
          * esa logica esta en el servicio.
          */
         AlbumDTO albumSaved = albumServices.createNew(dto, artistId);
+
         URI uri = new URI("/artist/" + albumSaved.getId());
+
         return ResponseEntity
                 .created(uri)
                 .body(albumSaved);
     }
 
+
     @GetMapping({ "/albums", "/albums/" })
+
     public ResponseEntity getAlbumsMethod() {
         // se llama al servicio y se le pide el listado de albums
+
         List<AlbumDTO> albums = albumServices.getAll();
+
         // se crea el response request
         return ResponseEntity
                 .ok()
@@ -45,14 +55,19 @@ public class AlbumController {
     }
 
     @GetMapping({ "/albums/{id}", "/albums/{id}/" })
+
     public ResponseEntity getAlbumByIdMethod(@PathVariable Long id) {
+
         AlbumDTO byId = albumServices.getById(id);
+
         return ResponseEntity
                 .ok()
                 .body(byId);
     }
 
+
     @DeleteMapping({ "/albums/{id}", "/albums/{id}/" })
+
     public ResponseEntity deleteAlbumByIdMethod(@PathVariable Long id) {
         albumServices.remove(id);
         return ResponseEntity
@@ -60,8 +75,11 @@ public class AlbumController {
                 .build();
     }
 
+
     @PatchMapping({ "/artists/{artistId}/albums/{albumId}", "/artists/{artistId}/albums/{albumId}/" })
+
     public ResponseEntity patchArtistByIdMethod(
+
             @RequestBody AlbumDTO dto,
             @PathVariable Long artistId,
             @PathVariable Long albumId) {

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ArtistService implements Services<ArtistDTO, Artist> {
+public class ArtistServices implements Services<ArtistDTO, Artist> {
 
     private ArtistMapper artistMapper = ArtistMapper.MAPPER;
 

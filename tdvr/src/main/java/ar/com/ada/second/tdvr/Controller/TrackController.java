@@ -1,10 +1,7 @@
 package ar.com.ada.second.tdvr.controller;
 
 import ar.com.ada.second.tdvr.model.dto.TrackDTO;
-import ar.com.ada.second.tdvr.model.mapper.TrackMapper;
-import ar.com.ada.second.tdvr.service.TrackService;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import ar.com.ada.second.tdvr.service.TrackServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +14,7 @@ import java.util.List;
 @RestController
 public class TrackController {
     @Autowired
-    private TrackService trackServices;
+    private TrackServices trackServices;
 
     @PostMapping({"/album/{albumId}/tracks", "/album/{albumId}/tracks/"})
     public ResponseEntity postAlbumMethod(

@@ -20,7 +20,7 @@ public class Track implements Serializable {
     @Column(nullable = false)
     private String title;
 
-    @Column(name = "track_duration", nullable = false)
+   @Column(name = "track_duration", nullable = false)
     private String trackDuration;
 
     @ManyToOne
