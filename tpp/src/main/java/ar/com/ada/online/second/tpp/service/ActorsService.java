@@ -1,4 +1,4 @@
 package ar.com.ada.online.second.tpp.service;
 
-public class MovieHasActorActressDto {
+public class ActorsService {
 }

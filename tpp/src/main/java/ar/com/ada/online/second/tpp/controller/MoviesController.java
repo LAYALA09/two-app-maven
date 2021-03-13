@@ -1,4 +1,4 @@
 package ar.com.ada.online.second.tpp.controller;
 
-public class MovieController {
+public class MoviesController {
 }
