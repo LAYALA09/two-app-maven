@@ -37,16 +37,16 @@ public class Movies implements Serializable {
 
     @ManyToMany
     @JoinTable(
-            name = "Actors_has_Movies",
+            name = "movies-actors",
             joinColumns = { @JoinColumn(
-                    name = "Movies_id",
+                    name = "movies_id",
                     referencedColumnName = "id",
-                    foreignKey = @ForeignKey(name = "fk_Actors_has_Movies_Movies"))
+                    foreignKey = @ForeignKey(name = "fk_movies-actors_movies"))
             },
             inverseJoinColumns = { @JoinColumn(
-                    name = "Actors_id",
+                    name = "actors_id",
                     referencedColumnName = "id",
-                    foreignKey = @ForeignKey(name = "fk_Actors_has_Movies_Actors"))
+                    foreignKey = @ForeignKey(name = "fk_movies-actors_actors"))
             }
     )
     private Set<Actors> actors;
