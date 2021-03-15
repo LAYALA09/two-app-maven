@@ -1,18 +1,20 @@
 package ar.com.ada.online.second.tpp.controller;
 
 import ar.com.ada.online.second.tpp.model.dto.MoviesDTO;
+import ar.com.ada.online.second.tpp.service.MoviesServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
+@RestController
+@RequestMapping(value = "movies")
 public class MoviesController {
+
     @Autowired
     private MoviesServices moviesServices;
 
@@ -21,7 +23,7 @@ public class MoviesController {
     public ResponseEntity postactorstMethod(
             @Valid @RequestBody MoviesDTO dto,
             @PathVariable Long actorsId) throws URISyntaxException {
-        MoviesDTO moviesSaved = moviesServices.createNew(dto, artistId);
+        MoviesDTO moviesSaved = moviesServices.createNew(dto, actorsId);
 
         URI uri = new URI("/actors/" + moviesSaved.getId());
 
@@ -33,22 +35,22 @@ public class MoviesController {
 
     @GetMapping({ "/movies", "/movies/" })
 
-    public ResponseEntity getAlbumsMethod() {
+    public ResponseEntity getMoviesMethod() {
         // se llama al servicio y se le pide el listado de albums
 
-        List<AlbumDTO> albums = albumServices.getAll();
+        List<MoviesDTO> movies = moviesServices.getAll();
 
         // se crea el response request
         return ResponseEntity
                 .ok()
-                .body(albums);
+                .body(movies);
     }
 
-    @GetMapping({ "/albums/{id}", "/albums/{id}/" })
+    @GetMapping({ "/movies/{id}", "/movies/{id}/" })
 
-    public ResponseEntity getAlbumByIdMethod(@PathVariable Long id) {
+    public ResponseEntity getMoviesByIdMethod(@PathVariable Long id) {
 
-        AlbumDTO byId = albumServices.getById(id);
+        MoviesDTO byId = moviesServices.getById(id);
 
         return ResponseEntity
                 .ok()
@@ -56,29 +58,29 @@ public class MoviesController {
     }
 
 
-    @DeleteMapping({ "/albums/{id}", "/albums/{id}/" })
+    @DeleteMapping({ "/movies/{id}", "/movies/{id}/" })
 
-    public ResponseEntity deleteAlbumByIdMethod(@PathVariable Long id) {
-        albumServices.remove(id);
+    public ResponseEntity deleteMoviesByIdMethod(@PathVariable Long id) {
+        moviesServices.remove(id);
         return ResponseEntity
                 .noContent()
                 .build();
     }
 
 
-    @PatchMapping({ "/artists/{artistId}/albums/{albumId}", "/artists/{artistId}/albums/{albumId}/" })
+    @PatchMapping({ "/actors/{actorsId}/movies/{moviesId}", "/actors/{actorsId}/movies/{moviesId}/" })
 
-    public ResponseEntity patchArtistByIdMethod(
+    public ResponseEntity patchActorsByIdMethod(
 
-            @RequestBody AlbumDTO dto,
-            @PathVariable Long artistId,
-            @PathVariable Long albumId) {
+            @RequestBody MoviesDTO dto,
+            @PathVariable Long actorstId,
+            @PathVariable Long moviesId) {
 
-        MoviesDTO albumUpdated = albumServices.update(dto, artistId, albumId);
+        MoviesDTO moviesUpdated = moviesServices.update(dto, actorstId, moviesId);
 
         return ResponseEntity
                 .ok()
-                .body(albumUpdated);
+                .body(moviesUpdated);
     }
 
 
