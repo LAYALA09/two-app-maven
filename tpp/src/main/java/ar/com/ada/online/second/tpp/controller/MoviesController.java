@@ -12,31 +12,18 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "movies")
+@RequestMapping(value="movies")
 public class MoviesController {
 
     @Autowired
     private MoviesServices moviesServices;
 
-    @PostMapping({ "/actors/{actorsId}/movies", "/actors/{actorsId}/movies/" })
-
-    public ResponseEntity postactorstMethod(
-            @Valid @RequestBody MoviesDTO dto,
-            @PathVariable Long actorsId) throws URISyntaxException {
-        MoviesDTO moviesSaved = moviesServices.createNew(dto, actorsId);
-
-        URI uri = new URI("/actors/" + moviesSaved.getId());
-
-        return ResponseEntity
-                .created(uri)
-                .body(moviesSaved);
-    }
 
 
-    @GetMapping({ "/movies", "/movies/" })
+    @GetMapping({ "/", "" })
 
     public ResponseEntity getMoviesMethod() {
-        // se llama al servicio y se le pide el listado de albums
+        // se llama al servicio y se le pide el listado de peliculas
 
         List<MoviesDTO> movies = moviesServices.getAll();
 
@@ -46,7 +33,7 @@ public class MoviesController {
                 .body(movies);
     }
 
-    @GetMapping({ "/movies/{id}", "/movies/{id}/" })
+    @GetMapping({ "/{id}", "/{id}/" })
 
     public ResponseEntity getMoviesByIdMethod(@PathVariable Long id) {
 
@@ -57,10 +44,23 @@ public class MoviesController {
                 .body(byId);
     }
 
+    @PostMapping({ "/", " " })
 
-    @DeleteMapping({ "/movies/{id}", "/movies/{id}/" })
+    public ResponseEntity postmoviestMethod(@Valid @RequestBody MoviesDTO dto) throws URISyntaxException {
+        MoviesDTO newMovies = moviesServices.createNew(dto);
+
+        URI uri = new URI("/movies/" + newMovies.getId());
+
+        return ResponseEntity
+                .created(uri)
+                .body(newMovies);
+    }
+
+
+    @DeleteMapping({ "{id}", "{id}/" })
 
     public ResponseEntity deleteMoviesByIdMethod(@PathVariable Long id) {
+
         moviesServices.remove(id);
         return ResponseEntity
                 .noContent()
@@ -68,15 +68,15 @@ public class MoviesController {
     }
 
 
-    @PatchMapping({ "/actors/{actorsId}/movies/{moviesId}", "/actors/{actorsId}/movies/{moviesId}/" })
+    @PatchMapping({ "/{id}", "/{id}/" })
 
     public ResponseEntity patchActorsByIdMethod(
 
             @RequestBody MoviesDTO dto,
-            @PathVariable Long actorstId,
-            @PathVariable Long moviesId) {
+            @PathVariable Long id
+            ) {
 
-        MoviesDTO moviesUpdated = moviesServices.update(dto, actorstId, moviesId);
+        MoviesDTO moviesUpdated = moviesServices.update(dto, id);
 
         return ResponseEntity
                 .ok()
