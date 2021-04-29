@@ -27,7 +27,7 @@ public class Album implements Serializable {
     private String title;
 
     @Column(nullable = false, columnDefinition = "smallint")
-    @Convert(converter = YearAttributeConverter.class)
+    @Convert(converter= YearAttributeConverter.class)
     private Year released;
 
     @ManyToOne

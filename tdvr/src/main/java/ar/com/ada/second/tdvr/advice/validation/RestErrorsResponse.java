@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 
 
-public class RestErrorsResponse<T> {
+public class RestErrorsResponse<T>{
 
     private Timestamp timestamp;
     private Integer status;

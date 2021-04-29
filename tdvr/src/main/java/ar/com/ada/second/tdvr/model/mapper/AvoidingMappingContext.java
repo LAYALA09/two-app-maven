@@ -14,7 +14,7 @@ public class AvoidingMappingContext {
 
     @BeforeMapping
     public <T> T getMappedInstance(Object source, @TargetType Class<T> targetType) {
-        return (T) knownInstances.get(source);
+        return (T)  knownInstances.get(source);
     }
 
     @BeforeMapping

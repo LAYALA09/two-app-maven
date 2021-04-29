@@ -6,13 +6,14 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 @Getter
 @Setter
+@ToString
 public class TrackDTO implements Serializable {
     private Long id;
     /**

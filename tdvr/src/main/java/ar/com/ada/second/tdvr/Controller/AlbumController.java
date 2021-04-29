@@ -10,8 +10,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-
-@RestController
+        @RestController
 public class AlbumController {
 
     @Autowired
@@ -31,9 +30,9 @@ public class AlbumController {
          *
          * esa logica esta en el servicio.
          */
-        AlbumDTO albumSaved = albumServices.createNew(dto, artistId);
+        AlbumDTO albumSaved=albumServices.createNew(dto, artistId);
 
-        URI uri = new URI("/artist/" + albumSaved.getId());
+        URI uri= new URI("/artist/" + albumSaved.getId());
 
         return ResponseEntity
                 .created(uri)

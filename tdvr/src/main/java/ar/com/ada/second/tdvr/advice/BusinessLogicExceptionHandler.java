@@ -1,7 +1,6 @@
 package ar.com.ada.second.tdvr.advice;
 
 import ar.com.ada.second.tdvr.advice.validation.RestErrorsResponse;
-
 import ar.com.ada.second.tdvr.exception.BusinessLogicException;
 import ar.com.ada.second.tdvr.exception.EntityError;
 import org.springframework.http.HttpStatus;

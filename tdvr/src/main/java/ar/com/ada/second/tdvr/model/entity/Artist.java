@@ -7,11 +7,13 @@ import java.util.List;
 
 //mismos atributos pero distintos roles con ArtistDTO
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 @ToString
-@Table(name = "Artist")
 @Entity
+@Table(name = "Artist")
+
 
 public class Artist implements Serializable{//vamos a mandar datos a una bd
 
@@ -23,6 +25,5 @@ public class Artist implements Serializable{//vamos a mandar datos a una bd
     @Column(nullable = false, length = 30)
     private String name;
 
-    @OneToMany(mappedBy = "artist")
-    private List<Album> albums;
+
 }
