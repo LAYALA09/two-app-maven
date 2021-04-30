@@ -1,6 +1,7 @@
 INSERT INTO Track
     (id, title,track_duration, Album_id)
-    values
+
+    VALUES
 
     (1, '«Material Girl»',1, 1),
     (2, '«Like a Virgin»',1, 1),

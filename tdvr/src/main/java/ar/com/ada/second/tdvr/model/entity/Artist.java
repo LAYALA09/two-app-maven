@@ -3,7 +3,7 @@ package ar.com.ada.second.tdvr.model.entity;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+
 
 //mismos atributos pero distintos roles con ArtistDTO
 @NoArgsConstructor
